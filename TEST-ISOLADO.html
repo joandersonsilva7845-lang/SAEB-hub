@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste Isolado - Quiz</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f0f0f0; }
+        .container { background: white; padding: 20px; border-radius: 8px; }
+        .test { margin: 20px 0; padding: 15px; background: #f9f9f9; border-left: 4px solid #007bff; }
+        .options { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
+        button { padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste Isolado do Quiz</h1>
+        
+        <div class="test">
+            <h2>Teste 1: Carregar dados</h2>
+            <div id="test1"></div>
+        </div>
+
+        <div class="test">
+            <h2>Teste 2: Renderizar opções manualmente</h2>
+            <h3 id="questionText"></h3>
+            <div id="optionsContainer" class="options"></div>
+        </div>
+
+        <div class="test">
+            <h2>Teste 3: Testar geração de pergunta</h2>
+            <div id="test3"></div>
+        </div>
+    </div>
+
+    <script src="data-fixed.js"></script>
+    <script src="quiz-fixed.js"></script>
+
+    <script>
+        console.log('=== TESTE ISOLADO ===');
+
+        // Teste 1
+        const test1 = document.getElementById('test1');
+        if (typeof saebQuizQuestions !== 'undefined' && saebQuizQuestions.length > 0) {
+            const q = saebQuizQuestions[0];
+            test1.innerHTML = `
+                ✅ DADOS CARREGADOS<br>
+                Pergunta: ${q.question}<br>
+                Opções: ${q.options.length}<br>
+                Primeira opção: ${q.options[0]}<br>
+                <pre>${JSON.stringify(q, null, 2)}</pre>
+            `;
+            console.log('✅ Dados carregados corretamente');
+        } else {
+            test1.innerHTML = '❌ Dados NÃO carregados';
+            console.error('❌ Dados não carregados');
+        }
+
+        // Teste 2: Renderizar opções
+        if (saebQuizQuestions && saebQuizQuestions.length > 0) {
+            const question = saebQuizQuestions[0];
+            document.getElementById('questionText').textContent = question.question;
+            
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.textContent = option;
+                btn.style.cssText = 'padding: 10px; background: #007bff; color: white; cursor: pointer; border: none; border-radius: 4px;';
+                container.appendChild(btn);
+                console.log(`✅ Opção ${index} renderizada:`, option);
+            });
+        }
+
+        // Teste 3: Chamar funções do quiz
+        const test3 = document.getElementById('test3');
+        try {
+            if (typeof generateQuestionsByDifficulty === 'function') {
+                const questions = generateQuestionsByDifficulty('medium', 5);
+                test3.innerHTML = `
+                    ✅ generateQuestionsByDifficulty funciona<br>
+                    Geradas: ${questions.length} perguntas<br>
+                    Primeira: ${questions[0].question}
+                `;
+                console.log('✅ generateQuestionsByDifficulty OK');
+            } else {
+                test3.innerHTML = '❌ generateQuestionsByDifficulty não existe';
+            }
+        } catch (e) {
+            test3.innerHTML = '❌ ERRO: ' + e.message;
+            console.error('❌ Erro:', e);
+        }
+    </script>
+</body>
+</html>

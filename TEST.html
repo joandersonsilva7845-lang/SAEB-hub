@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste - SAEB Hub</title>
+</head>
+<body style="font-family: Arial; padding: 20px; background: #f5f5f5;">
+    <h1>✅ Teste de Integração - SAEB Hub</h1>
+    
+    <div id="testResults" style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;"></div>
+    
+    <script src="data-fixed.js"></script>
+    
+    <script>
+        const results = [];
+        
+        // Teste 1: Dados carregados
+        if (typeof saebDocuments !== 'undefined' && saebDocuments.length === 3) {
+            results.push('✅ DOCUMENTOS: ' + saebDocuments.length + ' anos carregados');
+        } else {
+            results.push('❌ DOCUMENTOS: Erro ao carregar');
+        }
+        
+        // Teste 2: Competências por ano
+        if (typeof saebCompetencies !== 'undefined' && saebCompetencies.length === 3) {
+            results.push('✅ COMPETÊNCIAS: ' + saebCompetencies.length + ' anos encontrados');
+            
+            saebCompetencies.forEach((year, idx) => {
+                if (year.year && year.series) {
+                    results.push(`   • Ano ${year.year}: ${year.series.length} série(s)`);
+                }
+            });
+        } else {
+            results.push('❌ COMPETÊNCIAS: Erro ao carregar');
+        }
+        
+        // Teste 3: Quiz
+        if (typeof saebQuizQuestions !== 'undefined' && saebQuizQuestions.length === 10) {
+            results.push('✅ QUIZ: ' + saebQuizQuestions.length + ' perguntas carregadas');
+            
+            // Mostrar primeira pergunta como exemplo
+            if (saebQuizQuestions[0]) {
+                results.push('   • Exemplo: "' + saebQuizQuestions[0].question.substring(0, 50) + '..."');
+                results.push('   • Opções: ' + saebQuizQuestions[0].options.length);
+                results.push('   • Correta: ' + saebQuizQuestions[0].correct);
+            }
+        } else {
+            results.push('❌ QUIZ: Erro ao carregar');
+            results.push('   • saebQuizQuestions definido: ' + (typeof saebQuizQuestions !== 'undefined'));
+            if (typeof saebQuizQuestions !== 'undefined') {
+                results.push('   • Comprimento: ' + saebQuizQuestions.length);
+            }
+        }
+        
+        // Teste 4: Verificar se quiz pode acessar dados
+        setTimeout(() => {
+            try {
+                const quizTest = document.createElement('div');
+                quizTest.innerHTML = '<h3>Teste do Quiz</h3>';
+                
+                if (typeof saebQuizQuestions !== 'undefined' && saebQuizQuestions.length > 0) {
+                    quizTest.innerHTML += '<p>✅ Quiz pode acessar perguntas</p>';
+                    quizTest.innerHTML += '<p>Primeira pergunta: ' + saebQuizQuestions[0].question + '</p>';
+                } else {
+                    quizTest.innerHTML += '<p>❌ Quiz NÃO consegue acessar perguntas</p>';
+                }
+                
+                document.body.appendChild(quizTest);
+            } catch(e) {
+                console.error('Erro no teste do quiz:', e);
+            }
+        }, 100);
+        
+        // Exibir resultados
+        const testDiv = document.getElementById('testResults');
+        testDiv.innerHTML = '<pre style="color: #333; line-height: 1.8;">' + results.join('\n') + '</pre>';
+        
+        console.log('═══ TESTES ═══');
+        results.forEach(r => console.log(r));
+    </script>
+</body>
+</html>

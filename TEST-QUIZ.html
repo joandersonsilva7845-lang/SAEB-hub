@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste Quiz - SAEB Hub</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f0f0f0; }
+        .quiz-container { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .quiz-options button { display: block; margin: 10px 0; padding: 10px; width: 100%; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste do Quiz</h1>
+
+    <div id="quizIntro" class="quiz-container">
+        <p>Teste do quiz SAEB</p>
+        <button id="startQuizButton">Iniciar Quiz</button>
+    </div>
+
+    <div id="quizRound" class="quiz-container hidden">
+        <div>Pergunta <span id="quizCurrent">1</span> de <span id="quizTotal">10</span></div>
+        <div style="height: 10px; background: #ddd; margin: 10px 0;">
+            <div id="quizProgress" style="height: 100%; background: #4CAF50; width: 0%;"></div>
+        </div>
+        <h3 id="quizQuestionText"></h3>
+        <div id="quizOptions"></div>
+        <div id="quizFeedback" class="hidden"></div>
+        <button id="nextQuestionButton" disabled>Próxima</button>
+    </div>
+
+    <div id="quizEnd" class="quiz-container hidden">
+        <h3>Fim do Quiz!</h3>
+        <p>Pontuação: <span id="quizScore">0</span>/100</p>
+        <button id="restartQuizButton">Tentar Novamente</button>
+    </div>
+
+    <script src="data-fixed.js"></script>
+    <script src="quiz-fixed.js"></script>
+
+    <script>
+        console.log('=== TESTE DO QUIZ ===');
+        console.log('saebQuizQuestions:', typeof saebQuizQuestions);
+        console.log('Comprimento:', saebQuizQuestions ? saebQuizQuestions.length : 'N/A');
+
+        // Forçar inicialização
+        setTimeout(() => {
+            console.log('Forçando inicialização do quiz...');
+            initQuiz();
+        }, 100);
+    </script>
+</body>
+</html>

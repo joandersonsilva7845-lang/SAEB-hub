@@ -1,0 +1,57 @@
+{
+  "name": "SAEB Hub - Plataforma Educacional",
+  "short_name": "SAEB Hub",
+  "description": "Plataforma interativa completa para dominar o SAEB. Documentos oficiais, competências, quiz e relatórios.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0b4d91",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230b4d91' width='192' height='192'/><text y='140' font-size='120' font-weight='bold' fill='%23ffffff' text-anchor='middle' x='96'>S</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%230b4d91' width='512' height='512'/><text y='380' font-size='320' font-weight='bold' fill='%23ffffff' text-anchor='middle' x='256'>S</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%230b4d91' width='540' height='720'/><text y='360' font-size='200' font-weight='bold' fill='%23ffffff' text-anchor='middle' x='270'>SAEB Hub</text></svg>",
+      "sizes": "540x720",
+      "form_factor": "narrow",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Documentos",
+      "short_name": "Docs",
+      "description": "Acessar documentos oficiais do SAEB",
+      "url": "/?tab=documentos",
+      "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%23667eea' width='96' height='96'/><text y='72' font-size='60' text-anchor='middle' x='48'>📄</text></svg>", "sizes": "96x96", "type": "image/svg+xml"}]
+    },
+    {
+      "name": "Competências",
+      "short_name": "Skills",
+      "description": "Explorar competências de matemática",
+      "url": "/?tab=competencias",
+      "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%23f093fb' width='96' height='96'/><text y='72' font-size='60' text-anchor='middle' x='48'>🧠</text></svg>", "sizes": "96x96", "type": "image/svg+xml"}]
+    },
+    {
+      "name": "Quiz",
+      "short_name": "Quiz",
+      "description": "Começar um quiz interativo",
+      "url": "/?tab=quiz",
+      "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%234facfe' width='96' height='96'/><text y='72' font-size='60' text-anchor='middle' x='48'>🎯</text></svg>", "sizes": "96x96", "type": "image/svg+xml"}]
+    }
+  ]
+}

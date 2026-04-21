@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnóstico - Quiz</title>
+</head>
+<body style="font-family: monospace; padding: 20px; background: #f0f0f0;">
+    <h1>🔍 Diagnóstico do Quiz</h1>
+    <div id="output" style="background: white; padding: 20px; border-radius: 8px; overflow-x: auto;"></div>
+
+    <script src="data-fixed.js"></script>
+    
+    <script>
+        const output = document.getElementById('output');
+        const logs = [];
+        
+        logs.push('=== CARREGAMENTO DE DADOS ===');
+        logs.push('');
+        
+        // Teste 1
+        if (typeof saebQuizQuestions !== 'undefined') {
+            logs.push('✅ saebQuizQuestions DEFINIDO');
+            logs.push('   Tipo: ' + typeof saebQuizQuestions);
+            logs.push('   É array: ' + Array.isArray(saebQuizQuestions));
+            logs.push('   Comprimento: ' + saebQuizQuestions.length);
+            
+            if (saebQuizQuestions.length > 0) {
+                logs.push('');
+                logs.push('📝 Primeira pergunta:');
+                logs.push('   ' + JSON.stringify(saebQuizQuestions[0], null, 2).split('\n').slice(0, 5).join('\n   '));
+            }
+        } else {
+            logs.push('❌ saebQuizQuestions NÃO DEFINIDO');
+        }
+        
+        logs.push('');
+        logs.push('');
+        logs.push('=== CARREGAMENTO DE SCRIPTS ===');
+        logs.push('');
+        
+        // Verificar se quiz-fixed.js foi carregado
+        if (typeof quizState !== 'undefined') {
+            logs.push('✅ quiz-fixed.js CARREGADO');
+            logs.push('   quizState definido: true');
+        } else {
+            logs.push('❌ quiz-fixed.js NÃO CARREGADO');
+        }
+        
+        if (typeof generateQuestionsByDifficulty === 'function') {
+            logs.push('✅ generateQuestionsByDifficulty DISPONÍVEL');
+        } else {
+            logs.push('❌ generateQuestionsByDifficulty NÃO DISPONÍVEL');
+        }
+        
+        if (typeof renderQuestion === 'function') {
+            logs.push('✅ renderQuestion DISPONÍVEL');
+        } else {
+            logs.push('❌ renderQuestion NÃO DISPONÍVEL');
+        }
+        
+        logs.push('');
+        logs.push('');
+        logs.push('=== TESTE DE GERAÇÃO ===');
+        logs.push('');
+        
+        // Teste de geração
+        try {
+            if (typeof generateQuestionsByDifficulty === 'function' && saebQuizQuestions && saebQuizQuestions.length > 0) {
+                const testQuestions = generateQuestionsByDifficulty('medium', 5);
+                logs.push('✅ generateQuestionsByDifficulty() chamado');
+                logs.push('   Resultado: ' + testQuestions.length + ' perguntas geradas');
+                
+                if (testQuestions.length === 5) {
+                    logs.push('✅ Número correto de perguntas');
+                } else {
+                    logs.push('❌ Número INCORRETO de perguntas (esperado 5, obteve ' + testQuestions.length + ')');
+                }
+            }
+        } catch (e) {
+            logs.push('❌ ERRO ao chamar generateQuestionsByDifficulty:');
+            logs.push('   ' + e.message);
+        }
+        
+        // Renderizar
+        output.innerHTML = '<pre style="color: #333; line-height: 1.8;">' + logs.join('\n') + '</pre>';
+        
+        console.log(logs.join('\n'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="SAEB Hub - Plataforma interativa completa para dominar o SAEB. Documentos oficiais, competências por série, quiz avançado, análise de desempenho e certificados.">
+    <meta name="keywords" content="SAEB, educação básica, matemática, INEP, avaliação, competências, certificado">
+    <meta name="theme-color" content="#0b4d91">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:title" content="SAEB Hub - Plataforma Educacional Interativa">
+    <meta property="og:description" content="Explore documentos, competências, quiz interativo e relatórios profissionais do SAEB">
+    <meta property="og:type" content="website">
+    <meta name="author" content="SAEB Hub - Educação de Qualidade">
+    <title>SAEB Hub - Plataforma Educacional | Documentos, Quiz e Análise</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-weight='bold' fill='%230b4d91'>S</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body data-theme="light">
+    <a href="#main-content" class="skip-link">Pular para o conteudo principal</a>
+    
+    <!-- Barra de Acessibilidade Flutuante -->
+    <div class="accessibility-bar">
+        <button class="a11y-toggle" aria-label="Alternar painel de acessibilidade" aria-expanded="false" title="Alt+A" type="button">A11Y</button>
+        <div class="accessibility-controls" hidden>
+            <span class="accessibility-label">Acessibilidade</span>
+            <button id="highContrastToggle" class="a11y-btn" aria-label="Alternar modo alto contraste" title="Alt+1" type="button">Alto Contraste</button>
+            <button id="fontSizeToggle" class="a11y-btn" aria-label="Aumentar tamanho da fonte" title="Alt+2" type="button">Fonte Grande</button>
+            <button id="darkModeToggle" class="a11y-btn" aria-label="Alternar modo escuro" title="Alt+3" type="button">Modo Escuro</button>
+            <button id="resetPreferencesBtn" class="a11y-btn" aria-label="Redefinir preferencias" type="button">Redefinir</button>
+        </div>
+    </div>
+    <!-- Header Premium -->
+    <header class="hero" role="banner">
+        <div class="hero-overlay"></div>
+        <div class="hero-topbar">
+            <div class="brand-container">
+                <span class="brand-pill">SAEB Hub</span>
+                <span class="hero-chip">Educacao de Qualidade</span>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item"><strong id="totalDocuments">12+</strong> Documentos</div>
+                <div class="stat-item"><strong id="totalCompetencies">30+</strong> Habilidades</div>
+                <div class="stat-item"><strong id="userProgress">0%</strong> Progresso</div>
+                <div class="stat-item" id="level-badge" style="display:none"></div>
+                <div class="stat-item" id="sync-indicator" title="Status de sincronizacao"></div>
+            </div>
+            <div id="auth-panel" class="auth-panel" style="margin-left: auto;">
+                <button id="auth-btn" class="btn btn-primary" type="button">Entrar / Registrar</button>
+            </div>
+        </div>
+        <div class="hero-copy">
+            <p class="eyebrow">Domine o Sistema de Avaliacao da Educacao Basica</p>
+            <h1>SAEB Hub - Sua Plataforma Educacional Completa</h1>
+            <p class="hero-text">Acesse documentos oficiais, estude competencias de matematica, realize quiz interativo, analise seu desempenho e obtenha certificados de conclusao.</p>
+            <div class="hero-cta">
+                <button class="btn btn-primary" data-action="scroll-to-content" type="button">Explorar Plataforma</button>
+                <button class="btn btn-secondary" data-action="show-tour" type="button">Tour Guiado</button>
+            </div>
+            <div class="hero-badges">
+                <span class="badge-animated">Atualizado 2024</span>
+                <span class="badge-animated">Documentos Oficiais</span>
+                <span class="badge-animated">100% Gratuito</span>
+            </div>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <span class="feature-icon">DOC</span>
+                    <strong>Documentos Oficiais</strong>
+                    <p>Todos os materiais do INEP em um so lugar</p>
+                </div>
+                <div class="hero-feature">
+                    <span class="feature-icon">MAT</span>
+                    <strong>Competencias por Serie</strong>
+                    <p>Habilidades de Matematica estruturadas</p>
+                </div>
+                <div class="hero-feature">
+                    <span class="feature-icon">QUIZ</span>
+                    <strong>Quiz Interativo</strong>
+                    <p>Teste seu conhecimento com analise</p>
+                </div>
+                <div class="hero-feature">
+                    <span class="feature-icon">DADOS</span>
+                    <strong>Relatorios Detalhados</strong>
+                    <p>Acompanhe seu progresso em tempo real</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Seção de Acesso Rápido -->
+    <section class="quick-access-section">
+        <div class="card quick-access-card">
+            <div class="quick-access-content">
+                <div class="quick-access-text">
+                <h2 class="section-title">Acesso Rapido</h2>
+                    <p class="intro">Encontre exatamente o que precisa em segundos</p>
+                </div>
+                <div class="quick-link-list">
+                    <a href="#tab-documentos" data-tab-target="tab-documentos" class="quick-link documents" aria-label="Ir para documentos do SAEB">
+                        <span class="link-icon">DOC</span>
+                        <span class="link-text">Documentos do SAEB</span>
+                    </a>
+                    <a href="#tab-competencias" data-tab-target="tab-competencias" class="quick-link competencias" aria-label="Ir para competencias de matematica">
+                        <span class="link-icon">MAT</span>
+                        <span class="link-text">Habilidades de Matematica</span>
+                    </a>
+                    <a href="#tab-quiz" data-tab-target="tab-quiz" class="quick-link quiz-btn" aria-label="Iniciar quiz interativo">
+                        <span class="link-icon">QZ</span>
+                        <span class="link-text">Quiz Interativo</span>
+                    </a>
+                    <a href="#tab-stats" data-tab-target="tab-stats" class="quick-link stats-btn" aria-label="Ver estatisticas e progresso">
+                        <span class="link-icon">PR</span>
+                        <span class="link-text">Meu Progresso</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Conteudo Principal -->
+    <main id="main-content" role="main">
+        <!-- Navegacao por Abas -->
+        <div class="tab-nav-container">
+            <div class="tab-nav" role="tablist" aria-label="Navegacao por secoes">
+                <button class="tab-button active" data-tab="tab-overview" role="tab" aria-selected="true" aria-controls="tab-overview">Sobre o SAEB</button>
+                <button class="tab-button" data-tab="tab-documentos" role="tab" aria-selected="false" aria-controls="tab-documentos">Documentos</button>
+                <button class="tab-button" data-tab="tab-competencias" role="tab" aria-selected="false" aria-controls="tab-competencias">Matematica</button>
+                <button class="tab-button" data-tab="tab-quiz" role="tab" aria-selected="false" aria-controls="tab-quiz">Quiz</button>
+                <button class="tab-button" data-tab="tab-stats" role="tab" aria-selected="false" aria-controls="tab-stats">Progresso</button>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="globalSearch" placeholder="Buscar documentos, competencias..." aria-label="Busca global">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+        <!-- SEÇÃO: SOBRE O SAEB -->
+        <section id="tab-overview" class="tab-panel active">
+            <article class="card">
+                <h2 class="section-title">ℹ️ Sobre o SAEB</h2>
+                <p class="intro">O <strong>SAEB</strong> é o principal instrumento de medição de qualidade da educação básica no Brasil, desenvolvido pelo <strong>INEP</strong>.</p>
+                
+                <div class="overview-highlights">
+                    <div class="highlight-card">
+                        <span class="card-icon">🎯</span>
+                        <strong>Propósito Claro</strong>
+                        <p>Avaliar o desempenho dos alunos e diagnosticar desafios educacionais</p>
+                    </div>
+                    <div class="highlight-card">
+                        <span class="card-icon">📊</span>
+                        <strong>Dados Confiáveis</strong>
+                        <p>Usa TRI (Teoria de Resposta ao Item) para precisão máxima</p>
+                    </div>
+                    <div class="highlight-card">
+                        <span class="card-icon">🏆</span>
+                        <strong>Série Temporal</strong>
+                        <p>Acompanha evolução desde 1990 com dados comparáveis</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-title" data-target="acc-o-que-e">
+                            O que é o SAEB?
+                            <span class="accordion-icon">➕</span>
+                        </button>
+                        <div class="accordion-content" id="acc-o-que-e">
+                            <p>O SAEB significa <strong>Sistema de Avaliação da Educação Básica</strong>. É um sistema de avaliação que:</p>
+                            <ul>
+                                <li>Avalia alunos do 5º e 9º anos do fundamental e 3ª série do médio</li>
+                                <li>Foca em português e matemática</li>
+                                <li>Coleta informações sobre contexto escolar e socioeconômico</li>
+                                <li>Fornece dados para políticas públicas de educação</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-title" data-target="acc-historia">
+                            História do SAEB
+                            <span class="accordion-icon">➕</span>
+                        </button>
+                        <div class="accordion-content" id="acc-historia">
+                            <p><strong>1990</strong> - Primeira edição do SAEB</p>
+                            <p><strong>1995</strong> - Consolidação como programa regular</p>
+                            <p><strong>2005</strong> - Implementação da Prova Brasil</p>
+                            <p><strong>2019</strong> - Modernização e integração de tecnologias</p>
+                            <p><strong>2023</strong> - Expansão e novos formatos de avaliação</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-title" data-target="acc-como-funciona">
+                            Como o SAEB funciona?
+                            <span class="accordion-icon">➕</span>
+                        </button>
+                        <div class="accordion-content" id="acc-como-funciona">
+                            <p><strong>1. Seleção de Escolas</strong> - Amostra representativa do país</p>
+                            <p><strong>2. Aplicação de Provas</strong> - Português e Matemática</p>
+                            <p><strong>3. Coleta de Dados</strong> - Questionários socioeconômicos</p>
+                            <p><strong>4. Análise via TRI</strong> - Cálculo de proficiências</p>
+                            <p><strong>5. Divulgação de Resultados</strong> - Relatórios públicos</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-title" data-target="acc-quem-corrige">
+                            Quem corrige o SAEB?
+                            <span class="accordion-icon">➕</span>
+                        </button>
+                        <div class="accordion-content" id="acc-quem-corrige">
+                            <p>A correção do SAEB é realizada pelo <strong>INEP</strong> com:</p>
+                            <ul>
+                                <li><strong>Processamento Automático</strong> - Para questões objetivas</li>
+                                <li><strong>Avaliadores Qualificados</strong> - Para questões discursivas</li>
+                                <li><strong>Controle de Qualidade</strong> - Calibragem constante</li>
+                                <li><strong>Metodologia TRI</strong> - Análise sofisticada</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-title" data-target="acc-escala">
+                            Escala de Notas do SAEB
+                            <span class="accordion-icon">➕</span>
+                        </button>
+                        <div class="accordion-content" id="acc-escala">
+                            <div class="grade-scale">
+                                <div class="scale-item critical">
+                                    <strong>Insuficiente</strong>
+                                    <p>Desempenho crítico - requer intervenção urgente</p>
+                                </div>
+                                <div class="scale-item basic">
+                                    <strong>Básico</strong>
+                                    <p>Conhecimento parcial - precisa de reforço</p>
+                                </div>
+                                <div class="scale-item proficient">
+                                    <strong>Adequado</strong>
+                                    <p>Competências esperadas para a série</p>
+                                </div>
+                                <div class="scale-item advanced">
+                                    <strong>Avançado</strong>
+                                    <p>Desempenho superior - vai além das expectativas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-title" data-target="acc-para-quem">
+                            Para quem é o SAEB?
+                            <span class="accordion-icon">➕</span>
+                        </button>
+                        <div class="accordion-content" id="acc-para-quem">
+                            <p><strong>Educadores</strong> - Identificar lacunas de aprendizado</p>
+                            <p><strong>Gestores Escolares</strong> - Planejar ações de melhoria</p>
+                            <p><strong>Governo</strong> - Formular políticas educacionais</p>
+                            <p><strong>Pesquisadores</strong> - Investigar qualidade da educação</p>
+                            <p><strong>Sociedade</strong> - Acompanhar evolução da educação</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-title" data-target="acc-curiosidades">
+                            Curiosidades sobre o SAEB
+                            <span class="accordion-icon">➕</span>
+                        </button>
+                        <div class="accordion-content" id="acc-curiosidades">
+                            <ul>
+                                <li>🔍 Não gera nota individual - foca em resultados coletivos</li>
+                                <li>🎓 Alinha com metas do Plano Nacional de Educação</li>
+                                <li>📈 Usa TRI desde 1990 - metodologia de ponta</li>
+                                <li>🌍 Permite comparação internacional de resultados</li>
+                                <li>💡 Influenciou políticas educacionais em vários estados</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Quiz Gamificado -->
+            <article class="card quiz-game">
+                <h2 class="section-title">🎮 Aprenda Jogando</h2>
+                <div id="quizIntro" class="quiz-container">
+                    <p>Teste seu conhecimento sobre o SAEB com 10 perguntas interativas!</p>
+                    <div class="quiz-stats">
+                        <div>⏱️ <strong>Tempo:</strong> Sem limite</div>
+                        <div>🎯 <strong>Tipo:</strong> Múltipla escolha</div>
+                        <div>🏅 <strong>Recompensa:</strong> Certificado ao final</div>
+                    </div>
+                    <button id="startQuizButton" class="btn btn-primary">Iniciar Quiz</button>
+                </div>
+                <div id="quizRound" class="quiz-round hidden">
+                    <div class="quiz-meta">
+                        <span>Pergunta <span id="quizCurrent">1</span> de <span id="quizTotal">10</span></span>
+                        <div class="progress-bar">
+                            <div id="quizProgress" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="quiz-question-card">
+                        <h3 id="quizQuestionText"></h3>
+                        <div id="quizOptions" class="quiz-options"></div>
+                        <div id="quizFeedback" class="quiz-feedback hidden"></div>
+                    </div>
+                    <div class="quiz-controls">
+                        <button id="nextQuestionButton" class="btn btn-secondary" disabled>Próxima Questão →</button>
+                    </div>
+                </div>
+                <div id="quizEnd" class="quiz-end hidden">
+                    <div class="quiz-result-card">
+                        <h3>🎉 Parabéns!</h3>
+                        <p class="score-display">Sua Pontuação: <strong id="quizScore">0</strong>/100</p>
+                        <p id="quizMessage"></p>
+                        <div class="result-actions">
+                            <button id="restartQuizButton" class="btn btn-primary">Tentar Novamente</button>
+                            <button class="btn btn-secondary" data-action="download-certificate">📜 Baixar Certificado</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <!-- SEÇÃO: DOCUMENTOS -->
+        <section id="tab-documentos" class="tab-panel" hidden>
+            <article class="card">
+                <h2 class="section-title">📄 Documentos Oficiais do SAEB</h2>
+                <p class="intro">Todos os documentos oficiais do INEP organizados por ano e tipo. Clique para abrir ou baixar.</p>
+                
+                <div class="documents-section">
+                    <div class="filter-bar">
+                        <button class="filter-btn active" data-filter="all">Todos (12+)</button>
+                        <button class="filter-btn" data-filter="matrices">Matrizes</button>
+                        <button class="filter-btn" data-filter="manuals">Manuais</button>
+                        <button class="filter-btn" data-filter="reports">Relatórios</button>
+                    </div>
+
+                    <div id="documentsContainer" class="documents-list">
+                        <!-- Será preenchido por JavaScript -->
+                    </div>
+
+                    <div class="upload-section">
+                        <h3>📤 Compartilhe Documentos</h3>
+                        <div class="upload-area" id="uploadArea">
+                            <p>Arraste documentos aqui ou clique para selecionar</p>
+                            <span>Suporta PDF, DOC, DOCX</span>
+                            <input type="file" id="fileInput" accept=".pdf,.doc,.docx" multiple>
+                        </div>
+                        <ul id="documentsList2" class="uploaded-documents"></ul>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- SEÇÃO: COMPETÊNCIAS -->
+        <section id="tab-competencias" class="tab-panel" hidden>
+            <article class="card">
+                <h2 class="section-title">🧠 Competências de Matemática</h2>
+                <p class="intro">Explore as habilidades esperadas por série e entenda o que os alunos devem dominar.</p>
+                
+                <div class="competencies-container">
+                    <div class="series-tabs" id="seriesTabs">
+                        <!-- Será preenchido por JavaScript -->
+                    </div>
+
+                    <div id="competenciesContent" class="competencies-content">
+                        <!-- Será preenchido por JavaScript -->
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- SEÇÃO: QUIZ AVANÇADO -->
+        <section id="tab-quiz" class="tab-panel" hidden>
+            <article class="card">
+                <h2 class="section-title">🎯 Quiz Avançado</h2>
+                <p class="intro">Quiz completo com múltiplos níveis de dificuldade. Teste suas habilidades e receba análise detalhada.</p>
+                
+                <div class="quiz-advanced">
+                    <div class="difficulty-selector" style="margin-bottom: 30px;">
+                        <h3>Escolha o nível de dificuldade:</h3>
+                        <div class="difficulty-options">
+                            <button class="difficulty-btn" data-difficulty="easy">
+                                <span class="diff-icon">🟢</span> Fácil - 5 questões
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="medium">
+                                <span class="diff-icon">🟡</span> Médio - 10 questões
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="hard">
+                                <span class="diff-icon">🔴</span> Difícil - 15 questões
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="advancedQuizContainer" style="display: none;">
+                        <div class="quiz-meta" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <span>Pergunta <span id="advQuizCurrent">1</span> de <span id="advQuizTotal">10</span></span>
+                            <div class="progress-bar" style="width: 200px; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden;">
+                                <div id="advQuizProgress" style="height: 100%; background: var(--primary); width: 0%; transition: width 0.3s;"></div>
+                            </div>
+                        </div>
+                        <div class="quiz-question-card" style="background: var(--bg-surface); padding: 20px; border-radius: 12px;">
+                            <h3 id="advQuizQuestionText" style="margin-bottom: 20px; font-size: 1.2em;"></h3>
+                            <div id="advQuizOptions" class="quiz-options"></div>
+                            <div id="advQuizFeedback" style="margin-top: 15px;"></div>
+                        </div>
+                        <div style="margin-top: 20px; display: flex; gap: 10px;">
+                            <button id="advNextQuestionButton" class="btn btn-primary" disabled type="button">
+                                Próxima Questão →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- SEÇÃO: PROGRESSO E ESTATÍSTICAS -->
+        <section id="tab-stats" class="tab-panel" hidden>
+            <article class="card">
+                <h2 class="section-title">📈 Meu Progresso</h2>
+                <p class="intro">Acompanhe seu desempenho, conquistas e progresso geral na plataforma.</p>
+                
+                <div class="stats-dashboard">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">📚</span>
+                            <h3>Documentos Consultados</h3>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="stat-documents">0</div>
+                            <div class="stat-bar">
+                                <div class="stat-bar-fill" id="stat-documents-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">✅</span>
+                            <h3>Quiz Completados</h3>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="stat-quizzes">0</div>
+                            <div class="stat-average">Média: <strong id="stat-avg-score">0%</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">🎓</span>
+                            <h3>Certificados Obtidos</h3>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="stat-certificates">0</div>
+                            <div class="stat-detail">Progresso: <strong id="stat-progress">0%</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">⏱️</span>
+                            <h3>Tempo Total</h3>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="stat-time">0h</div>
+                            <div class="stat-detail">Dedicação: <strong id="stat-streak">0</strong> dias</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievements-section">
+                    <h3>🏆 Seus Troféus</h3>
+                    <div class="achievements-grid" id="achievementsGrid">
+                        <!-- Será preenchido por JavaScript -->
+                    </div>
+                </div>
+
+                <div class="performance-chart">
+                    <h3>📊 Seu Desempenho</h3>
+                    <canvas id="performanceChart" width="400" height="200"></canvas>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" data-action="export-data">📥 Exportar Dados</button>
+                    <button class="btn btn-secondary" data-action="reset-stats">🔄 Redefinir Tudo</button>
+                </div>
+
+                <!-- Novos Painéis de Funcionalidades Avançadas -->
+                <section class="advanced-features">
+                    <!-- Leaderboard Global -->
+                    <article class="card">
+                        <h3>🏆 Ranking Global</h3>
+                        <div id="global-leaderboard">
+                            <p>Carregando ranking...</p>
+                        </div>
+                    </article>
+
+                    <!-- Leaderboard de Amigos -->
+                    <article class="card">
+                        <h3>👥 Ranking de Amigos</h3>
+                        <div id="friends-leaderboard">
+                            <p>Adicione amigos para competir!</p>
+                        </div>
+                    </article>
+
+                    <!-- Desafios -->
+                    <article class="card">
+                        <h3>🎯 Desafios & Competições</h3>
+                        <div id="challenges-container">
+                            <p>Nenhum desafio no momento</p>
+                        </div>
+                    </article>
+
+                    <!-- Sincronização Cloud -->
+                    <article class="card">
+                        <h3>☁️ Sincronização na Cloud</h3>
+                        <div id="sync-settings-panel">
+                            <p>Carregando configurações...</p>
+                        </div>
+                    </article>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- Modal de Autenticação -->
+    <div id="auth-modal" class="modal" style="display: none;" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" data-auth-close type="button" aria-label="Fechar modal">✕</button>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" data-auth-tab="login" type="button" aria-selected="true">🔐 Login</button>
+                <button class="auth-tab-btn" data-auth-tab="register" type="button" aria-selected="false">✍️ Registrar</button>
+            </div>
+
+            <!-- Formulário de Login -->
+            <form id="login-form" class="auth-form">
+                <h2>Entrar na Conta</h2>
+                <div class="form-group">
+                    <label for="login-email">📧 Email:</label>
+                    <input type="email" id="login-email" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">🔒 Senha:</label>
+                    <input type="password" id="login-password" placeholder="Sua senha" required>
+                </div>
+                <button type="button" class="btn btn-primary btn-block" id="login-btn">Entrar</button>
+            </form>
+
+            <!-- Formulário de Registro -->
+            <form id="register-form" class="auth-form" style="display: none;" hidden>
+                <h2>Criar Conta</h2>
+                <div class="form-group">
+                    <label for="register-name">👤 Nome Completo:</label>
+                    <input type="text" id="register-name" placeholder="Seu nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">📧 Email:</label>
+                    <input type="email" id="register-email" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">🔒 Senha (mín. 6 caracteres):</label>
+                    <input type="password" id="register-password" placeholder="Sua senha" required>
+                </div>
+                <button type="button" class="btn btn-primary btn-block" id="register-btn">Registrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Premium -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>SAEB Hub</h4>
+                <p>Plataforma educacional interativa para dominar o SAEB</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Úteis</h4>
+                <ul>
+                    <li><a href="https://www.inep.gov.br" target="_blank" rel="noopener">INEP</a></li>
+                    <li><a href="https://www.gov.br/mec" target="_blank" rel="noopener">Ministério da Educação</a></li>
+                    <li><a href="https://www.gov.br" target="_blank" rel="noopener">Governo Federal</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <p>📧 Joandersonasilva472@gmail.com</p>
+                <p>📱 (82) 99933-9427</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SAEB Hub. Todos os direitos reservados. | <a href="#">Privacidade</a> | <a href="#">Termos de Uso</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data-fixed.js"></script>
+    <script src="accessibility.js"></script>
+    <script src="accordion-fixed.js"></script>
+    <script src="tabs-fixed.js"></script>
+    <script src="quiz-fixed.js"></script>
+    <script src="document-renderer-fixed.js"></script>
+    <script src="competency-renderer-fixed.js"></script>
+    <script src="utils.js"></script>
+    <script src="analytics.js"></script>
+    <script src="auth.js"></script>
+    <script src="api-integration.js"></script>
+    <script src="notifications.js"></script>
+    <script src="leaderboard.js"></script>
+    <script src="sync.js"></script>
+    <script src="main-fixed.js"></script>
+</body>
+</html>
+
